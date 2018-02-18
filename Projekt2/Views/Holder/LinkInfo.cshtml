@@ -1,0 +1,19 @@
+﻿@model Projekt2.Models.ProjectModels.Link
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Info</h2>
+<p>Name: @Model.Name</p>
+<p>Description: @Model.Description</p>
+<p>Times clicked: @Model.Clicked</p>
+<p>URL: <a target="_blank" asp-action="Click" asp-route-linkId="@Model.Id" asp-route-url="@Model.Url">@Model.Url</a></p>
+<br/>
+<div class="row container-fluid">
+    <a class="btn btn-danger" asp-action="RemoveLink" asp-route-linkId="@Model.Id">Remove</a>
+    <a class="btn btn-info" asp-action="Modify" asp-route-linkId="@Model.Id"><i class="glyphicon glyphicon-cog"></i></a>
+    <a class="btn btn-default" asp-action="Index">Go back</a>
+</div>
+

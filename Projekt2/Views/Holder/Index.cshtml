@@ -1,0 +1,70 @@
+﻿@model Projekt2.Models.ProjectModels.IndexViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<head>
+    <title>Home</title>
+</head>
+
+<h2>Home</h2>
+
+@if(@Model.Holders.Capacity == 0) {
+    <br/>
+    <p>You have no folders.</p>
+    <p><a asp-action="AddHolder">Click here</a> to add some right now.</p>
+    <br/>
+    <br/>
+}
+else {
+    <a class="btn btn-success" asp-action="AddHolder"><i class="glyphicon glyphicon-plus"></i></a>
+    <br/>
+    <br/>
+foreach (var holder in Model.Holders)
+{
+    
+    <button class="btn btn-block btn-lg" onclick="hide(@Model.Holders.IndexOf(holder).ToString())">@holder.Name</button>
+    <div id=@Model.Holders.IndexOf(holder).ToString()>
+        <br />
+        @foreach (var link in holder.Links)
+        {
+            <div class="container-fluid row">
+                <a target="_blank" class="col-xs-4" asp-action="Click" asp-route-linkId="@link.Id" asp-route-url="@link.Url">@link.Name</a>
+                <a style="color: darkred" class="col-xs-4" asp-controller="Holder" asp-action="RemoveLink" asp-route-holderId="@holder.Id" asp-route-linkId="@link.Id">Remove</a>
+                <a class="col-xs-4 btn" asp-controller="Holder" asp-action="LinkInfo" asp-route-linkId="@link.Id"><i class="glyphicon glyphicon-info-sign"></i></a>
+            </div>
+
+        }
+    </div>
+    <br/>
+    <a class="btn btn-info btn-sm" asp-action="AddLink" asp-route-holderId="@holder.Id">Add Link</a>
+    <a class ="btn btn-danger btn-sm" asp-action="RemoveHolder" asp-route-holderId="@holder.Id"><i class="glyphicon glyphicon-trash"></i></a>
+    <br/>
+    <br/>
+}
+}
+<br/>
+<div class="row">
+    <div class="col-xs-2">
+        <p></p>
+    </div>
+    <div class="col-xs-5">
+    <h4>Some popular links:</h4>
+        <ol>
+            @foreach (var link in Model.Popular)
+            {
+                <li> <a target="_blank" asp-action="Click" asp-route-linkId="@link.Id" asp-route-url="@link.Url">@link.Name</a> </li>
+            }
+        </ol>
+   </div>
+</div>
+<script>
+    function hide(id) {
+        var x = document.getElementById(id);
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>

@@ -1,0 +1,14 @@
+﻿@model Projekt2.Models.ProjectModels.Holder
+@{
+    ViewData["Title"] = "AddHolder";
+}
+
+<h2>Add Folder</h2>
+
+<form asp-action="AddHolder" method="post">
+    Name: &ensp;&nbsp;<input asp-for="Name"/> <span asp-validation-for="Name"></span> <br/>
+    <input type="submit"/>
+    <br/>
+    <br/>
+    <a class="btn btn-default" asp-controller="Holder" asp-action="Index">Go back</a>
+</form>

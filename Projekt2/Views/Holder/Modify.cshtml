@@ -1,0 +1,13 @@
+﻿@model Projekt2.Models.ProjectModels.Link
+@{
+    ViewData["Title"] = "AddLink";
+}
+<h2>Modify link</h2>
+<form asp-action="Modify" method="post">
+    <p>Name: &emsp;&ensp;&ensp;&ensp;&nbsp;<input asp-for="Name" /> <span asp-validation-for="Name"></span></p>
+    <p>Description: &nbsp;<input asp-for="Description" /> <span asp-validation-for="Description"></span></p>
+    <input type="submit" />
+    <br />
+    <br />
+    <a class="btn btn-default" asp-controller="Holder" asp-action="Back">Go back</a>
+</form>
